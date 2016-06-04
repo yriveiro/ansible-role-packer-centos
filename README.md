@@ -60,7 +60,9 @@ None.
 ## Example Playbook
 
 ```
-P
+- hosts: all
+  roles:
+    - { role: yriveiro.packer-centos }
 ```
 
 ## License
