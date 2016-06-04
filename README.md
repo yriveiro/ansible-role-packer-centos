@@ -11,20 +11,20 @@ This role is only focused on VirtualBox.
 Ansible must be installed via a shell provisioner. Packer .json template would be something like:
 
 ```json
-    "provisioners": [
-      {
-        "type": "shell",
-        "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
-        "script": "scripts/ansible.sh"
-      },
-      {
-        "type": "ansible-local",
-        "playbook_file": "ansible/main.yml",
-        "role_paths": [
-          "./ansible-roles/yriveiro.packer-centos",
-        ]
-      }
-    ],
+"provisioners": [
+  {
+    "type": "shell",
+    "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
+    "script": "scripts/ansible.sh"
+  },
+  {
+    "type": "ansible-local",
+    "playbook_file": "ansible/main.yml",
+    "role_paths": [
+      "./ansible-roles/yriveiro.packer-centos",
+    ]
+  }
+],
 ```
 
 The files should contain, at a minimum:
@@ -32,21 +32,21 @@ The files should contain, at a minimum:
 **scripts/ansible.sh**:
 
 ```sh
-    #!/bin/bash -eux
-    # Add the EPEL repository, and install Ansible.
-    rpm -ivh http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
-    yum -y install ansible python-setuptools
+#!/bin/bash -eux
+# Add the EPEL repository, and install Ansible.
+rpm -ivh http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
+yum -y install ansible python-setuptools
 ```
 
 **ansible/main.yml**:
 
 ```
-    ---
-    - hosts: all
-      sudo: yes
-      gather_facts: yes
-      roles:
-        - yriveiro.packer-centos
+---
+- hosts: all
+  sudo: yes
+  gather_facts: yes
+  roles:
+    - yriveiro.packer-centos
 ```
 
 ## Role Variables
@@ -60,9 +60,7 @@ None.
 ## Example Playbook
 
 ```
-    - hosts: all
-      roles:
-        - { role: yriveiro.packer-centos }
+P
 ```
 
 ## License
